@@ -44,30 +44,250 @@ A comprehensive, modern Neovim configuration with Python support, intelligent au
 - **Which-Key**: Discoverable keybindings
 - **Multiple LSP Servers**: Support for Python, Lua, TypeScript, HTML, CSS, JSON, Bash
 
-## Prerequisites
+## Prerequisites Installation
 
-Before installation, ensure you have:
+This configuration requires several tools. Follow the installation commands for your operating system:
 
-- **Neovim** >= 0.9.0 (required)
-  - macOS: `brew install neovim`
-  - Ubuntu: `sudo apt install neovim`
-  - Arch: `sudo pacman -S neovim`
-  - Fedora: `sudo dnf install neovim`
+### 1. Neovim (>= 0.9.0) - Required
 
-- **Git** (required)
+**macOS:**
+```bash
+brew install neovim
+```
 
-- **Python 3** with pip (for Python development)
+**Ubuntu/Debian:**
+```bash
+# For latest version, use snap or AppImage
+sudo snap install nvim --classic
 
-- **Node.js** >= 16 (for LSP servers)
-  - Download from: https://nodejs.org/
+# Or build from source for latest features:
+# sudo apt install ninja-build gettext cmake unzip curl
+# git clone https://github.com/neovim/neovim
+# cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
+# sudo make install
+```
 
-- **ripgrep** (recommended for Telescope live grep)
-  - macOS: `brew install ripgrep`
-  - Ubuntu: `apt install ripgrep`
+**Arch Linux:**
+```bash
+sudo pacman -S neovim
+```
 
-- **fd** (optional but recommended for Telescope)
-  - macOS: `brew install fd`
-  - Ubuntu: `apt install fd-find`
+**Fedora/RHEL:**
+```bash
+sudo dnf install neovim
+```
+
+**Windows:**
+```powershell
+# Using Chocolatey
+choco install neovim
+
+# Or download from: https://github.com/neovim/neovim/releases
+```
+
+### 2. Git - Required
+
+**macOS:**
+```bash
+brew install git
+```
+
+**Ubuntu/Debian:**
+```bash
+sudo apt update
+sudo apt install git
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -S git
+```
+
+**Fedora/RHEL:**
+```bash
+sudo dnf install git
+```
+
+**Windows:**
+```powershell
+# Download from: https://git-scm.com/download/win
+# Or use Chocolatey:
+choco install git
+```
+
+### 3. Python 3 with pip - Required for Python Development
+
+**macOS:**
+```bash
+brew install python3
+```
+
+**Ubuntu/Debian:**
+```bash
+sudo apt update
+sudo apt install python3 python3-pip python3-venv
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -S python python-pip
+```
+
+**Fedora/RHEL:**
+```bash
+sudo dnf install python3 python3-pip
+```
+
+**Windows:**
+```powershell
+# Download from: https://www.python.org/downloads/
+# Or use Chocolatey:
+choco install python
+```
+
+### 4. Node.js (>= 16) - Required for LSP Servers
+
+**macOS:**
+```bash
+brew install node
+```
+
+**Ubuntu/Debian:**
+```bash
+# Using NodeSource repository for latest version
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -S nodejs npm
+```
+
+**Fedora/RHEL:**
+```bash
+sudo dnf install nodejs npm
+```
+
+**Windows:**
+```powershell
+# Download from: https://nodejs.org/
+# Or use Chocolatey:
+choco install nodejs
+```
+
+### 5. ripgrep - Recommended for Fuzzy Search
+
+**macOS:**
+```bash
+brew install ripgrep
+```
+
+**Ubuntu/Debian:**
+```bash
+sudo apt install ripgrep
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -S ripgrep
+```
+
+**Fedora/RHEL:**
+```bash
+sudo dnf install ripgrep
+```
+
+**Windows:**
+```powershell
+choco install ripgrep
+```
+
+### 6. fd - Optional but Recommended
+
+**macOS:**
+```bash
+brew install fd
+```
+
+**Ubuntu/Debian:**
+```bash
+sudo apt install fd-find
+# Create alias (fd-find is named fd-find on Debian/Ubuntu)
+echo 'alias fd=fdfind' >> ~/.bashrc
+source ~/.bashrc
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -S fd
+```
+
+**Fedora/RHEL:**
+```bash
+sudo dnf install fd-find
+```
+
+**Windows:**
+```powershell
+choco install fd
+```
+
+### 7. Build Tools (for Telescope fzf-native)
+
+**macOS:**
+```bash
+# Xcode Command Line Tools (usually already installed)
+xcode-select --install
+```
+
+**Ubuntu/Debian:**
+```bash
+sudo apt install build-essential
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -S base-devel
+```
+
+**Fedora/RHEL:**
+```bash
+sudo dnf groupinstall "Development Tools"
+```
+
+**Windows:**
+```powershell
+# Install Visual Studio Build Tools or MinGW
+choco install mingw
+```
+
+### Quick Install All Prerequisites
+
+**macOS (using Homebrew):**
+```bash
+brew install neovim git python3 node ripgrep fd
+xcode-select --install
+```
+
+**Ubuntu/Debian:**
+```bash
+sudo apt update
+sudo apt install -y neovim git python3 python3-pip python3-venv ripgrep fd-find build-essential
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -S neovim git python python-pip nodejs npm ripgrep fd base-devel
+```
+
+**Fedora/RHEL:**
+```bash
+sudo dnf install -y neovim git python3 python3-pip nodejs npm ripgrep fd-find
+sudo dnf groupinstall "Development Tools"
+```
 
 ## Installation
 
@@ -75,8 +295,8 @@ Before installation, ensure you have:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/nvim-config.git
-   cd nvim-config
+   git clone https://github.com/ykkaixin/XVim2.git
+   cd XVim2
    ```
 
 2. Run the installation script:
@@ -100,13 +320,15 @@ On first launch, plugins will automatically install. This may take a few minutes
 
 2. Clone this repository to your Neovim config directory:
    ```bash
-   git clone https://github.com/yourusername/nvim-config.git ~/.config/nvim
+   git clone https://github.com/ykkaixin/XVim2.git ~/.config/nvim
    ```
 
 3. Launch Neovim and wait for plugins to install:
    ```bash
    nvim
    ```
+
+> **Note:** It's recommended to rename this repository to something like `nvim-config` for clarity. See the [Repository Rename Guide](#repository-rename-guide) section below.
 
 ## Post-Installation Setup
 
@@ -334,6 +556,50 @@ Install ripgrep:
 ## Contributing
 
 Feel free to customize this configuration to your needs! If you make improvements, consider sharing them.
+
+## Repository Rename Guide
+
+This repository was originally named `XVim2` (an Xcode Vim plugin). Since it's now a Neovim configuration, you may want to rename it for clarity.
+
+### How to Rename on GitHub
+
+1. **Go to your repository settings:**
+   - Navigate to: https://github.com/ykkaixin/XVim2
+   - Click on "Settings" tab
+   - In the "Repository name" field, enter a new name like: `nvim-config` or `neovim-dotfiles`
+   - Click "Rename"
+
+2. **Update your local repository:**
+   ```bash
+   cd XVim2
+   git remote set-url origin https://github.com/ykkaixin/nvim-config.git
+   ```
+
+3. **Rename your local folder (optional):**
+   ```bash
+   cd ..
+   mv XVim2 nvim-config
+   cd nvim-config
+   ```
+
+### Recommended Names
+
+- `nvim-config` - Simple and clear
+- `neovim-config` - More explicit
+- `dotfiles-nvim` - If part of larger dotfiles
+- `vim-config` - Classic naming
+- `dev-nvim` - For development-focused config
+
+### After Renaming
+
+Update the clone commands in your documentation:
+```bash
+# Old
+git clone https://github.com/ykkaixin/XVim2.git
+
+# New
+git clone https://github.com/ykkaixin/nvim-config.git
+```
 
 ## Credits
 
