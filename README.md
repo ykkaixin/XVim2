@@ -295,8 +295,8 @@ sudo dnf groupinstall "Development Tools"
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/ykkaixin/XVim2.git
-   cd XVim2
+   git clone https://github.com/YOUR_USERNAME/nvim-config.git
+   cd nvim-config
    ```
 
 2. Run the installation script:
@@ -320,7 +320,7 @@ On first launch, plugins will automatically install. This may take a few minutes
 
 2. Clone this repository to your Neovim config directory:
    ```bash
-   git clone https://github.com/ykkaixin/XVim2.git ~/.config/nvim
+   git clone https://github.com/YOUR_USERNAME/nvim-config.git ~/.config/nvim
    ```
 
 3. Launch Neovim and wait for plugins to install:
@@ -328,7 +328,7 @@ On first launch, plugins will automatically install. This may take a few minutes
    nvim
    ```
 
-> **Note:** It's recommended to rename this repository to something like `nvim-config` for clarity. See the [Repository Rename Guide](#repository-rename-guide) section below.
+> **Note:** Replace `YOUR_USERNAME` with your GitHub username and `nvim-config` with your chosen repository name.
 
 ## Post-Installation Setup
 
@@ -557,48 +557,54 @@ Install ripgrep:
 
 Feel free to customize this configuration to your needs! If you make improvements, consider sharing them.
 
-## Repository Rename Guide
+## Repository Setup Guide
 
-This repository was originally named `XVim2` (an Xcode Vim plugin). Since it's now a Neovim configuration, you may want to rename it for clarity.
+### Recommended Repository Names
 
-### How to Rename on GitHub
+When creating your own copy of this configuration, consider these naming options:
 
-1. **Go to your repository settings:**
-   - Navigate to: https://github.com/ykkaixin/XVim2
-   - Click on "Settings" tab
-   - In the "Repository name" field, enter a new name like: `nvim-config` or `neovim-dotfiles`
-   - Click "Rename"
+- **`nvim-config`** ⭐ Recommended - Simple and clear
+- **`neovim-config`** - More explicit
+- **`modern-nvim`** - Emphasizes modern features
+- **`nvim-ide`** - Highlights IDE-like functionality
+- **`dotfiles-nvim`** - If part of larger dotfiles collection
+- **`nvim-python-ide`** - Emphasizes Python development
 
-2. **Update your local repository:**
+### Creating Your Repository
+
+1. **Fork or create a new repository** on GitHub:
+   - Visit: https://github.com/new
+   - Choose your preferred name (e.g., `nvim-config`)
+   - Description: `Modern Neovim configuration with Python LSP, AI autocomplete, and fuzzy search`
+   - Make it Public or Private
+
+2. **Clone and customize:**
    ```bash
-   cd XVim2
-   git remote set-url origin https://github.com/ykkaixin/nvim-config.git
-   ```
-
-3. **Rename your local folder (optional):**
-   ```bash
-   cd ..
-   mv XVim2 nvim-config
+   git clone https://github.com/YOUR_USERNAME/nvim-config.git
    cd nvim-config
+   # Customize your configuration as needed
    ```
 
-### Recommended Names
+3. **Keep it updated:**
+   ```bash
+   # After making changes
+   git add .
+   git commit -m "Update configuration"
+   git push
+   ```
 
-- `nvim-config` - Simple and clear
-- `neovim-config` - More explicit
-- `dotfiles-nvim` - If part of larger dotfiles
-- `vim-config` - Classic naming
-- `dev-nvim` - For development-focused config
+### Sharing Your Configuration
 
-### After Renaming
-
-Update the clone commands in your documentation:
+Your repository URL will be:
 ```bash
-# Old
-git clone https://github.com/ykkaixin/XVim2.git
+https://github.com/YOUR_USERNAME/nvim-config
+```
 
-# New
-git clone https://github.com/ykkaixin/nvim-config.git
+Anyone can then use your configuration:
+```bash
+git clone https://github.com/YOUR_USERNAME/nvim-config.git
+cd nvim-config
+./install.sh
 ```
 
 ## Credits
