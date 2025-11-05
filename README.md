@@ -295,8 +295,8 @@ sudo dnf groupinstall "Development Tools"
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/nvim-config.git
-   cd nvim-config
+   git clone https://github.com/ykkaixin/vimrc.git
+   cd vimrc
    ```
 
 2. Run the installation script:
@@ -320,7 +320,7 @@ On first launch, plugins will automatically install. This may take a few minutes
 
 2. Clone this repository to your Neovim config directory:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/nvim-config.git ~/.config/nvim
+   git clone https://github.com/ykkaixin/vimrc.git ~/.config/nvim
    ```
 
 3. Launch Neovim and wait for plugins to install:
@@ -328,7 +328,6 @@ On first launch, plugins will automatically install. This may take a few minutes
    nvim
    ```
 
-> **Note:** Replace `YOUR_USERNAME` with your GitHub username and `nvim-config` with your chosen repository name.
 
 ## Post-Installation Setup
 
@@ -495,7 +494,7 @@ Edit `lua/core/options.lua` to change Neovim behavior:
 ### If Installed via Symlink
 
 ```bash
-cd /path/to/nvim-config
+cd /path/to/vimrc
 git pull
 ```
 
@@ -504,7 +503,7 @@ Then in Neovim: `:Lazy sync`
 ### If Copied Configuration
 
 ```bash
-cd /path/to/nvim-config
+cd /path/to/vimrc
 git pull
 cp -r init.lua lua ~/.config/nvim/
 ```
@@ -580,8 +579,8 @@ When creating your own copy of this configuration, consider these naming options
 
 2. **Clone and customize:**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/nvim-config.git
-   cd nvim-config
+   git clone https://github.com/ykkaixin/vimrc.git
+   cd vimrc
    # Customize your configuration as needed
    ```
 
@@ -597,13 +596,13 @@ When creating your own copy of this configuration, consider these naming options
 
 Your repository URL will be:
 ```bash
-https://github.com/YOUR_USERNAME/nvim-config
+https://github.com/ykkaixin/vimrc
 ```
 
 Anyone can then use your configuration:
 ```bash
-git clone https://github.com/YOUR_USERNAME/nvim-config.git
-cd nvim-config
+git clone https://github.com/ykkaixin/vimrc.git
+cd vimrc
 ./install.sh
 ```
 
