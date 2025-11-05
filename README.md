@@ -1,139 +1,355 @@
-# XVim2
+# Modern Neovim Configuration
 
-  XVim2 is a Vim plugin for Xcode intending to offer a compelling Vim experience without the need to give up any Xcode features.
-  
-  - Xcode 9 or above, follow the installation instructions below.
-  - Xcode 8 or below, you should use [XVim](https://github.com/XVimProject/XVim)
-  - [Google Group for XVim developers](https://groups.google.com/d/forum/xvim-developers) has been created.
+A comprehensive, modern Neovim configuration with Python support, intelligent autocomplete, fuzzy search, AI-powered suggestions, and more. Designed to be portable and easy to set up on any new computer.
 
-## Install
+## Features
 
-  1. Sign Xcode with your own certificate. You can [read the instructions for how to do this](SIGNING_Xcode.md) and if you have questions or concerns about what this means you can [read the FAQ on why you need to resign Xcode to use XVim2](why_resign_xcode.md).
-  
-  2. Clone the repo:
-  ```bash
-  $ git clone https://github.com/XVimProject/XVim2.git
-  ```
-  
-  3. Confirm `xcode-select` points to your Xcode:
-  ```bash
-  $ xcode-select -p
-  /Applications/Xcode.app/Contents/Developer
-  ```
-  
-  If this doesn't show your Xcode application path, use `xcode-select -s /path/to/Xcode.app/Contents/Developer` to set the correct path.
+### Core Features
+- **Modern Lua Configuration**: Fast and maintainable configuration written in Lua
+- **Plugin Management**: Lazy.nvim for efficient plugin loading
+- **Beautiful UI**: TokyoNight color scheme, lualine status bar, and bufferline
+- **File Explorer**: Nvim-tree with icons and git integration
+- **Git Integration**: Gitsigns for inline git status
 
-  4. `git checkout` a branch for your Xcode version. See [Branches and Releases](#branches-and-releases) section for more information.
-  
-  5. `make`:
-  ```bash
-  $ cd XVim2
-  $ make
-  ```
+### Developer Experience
+- **Python LSP**: Full Python support with Pyright
+  - Intelligent autocomplete
+  - Type checking
+  - Go to definition/references
+  - Inline documentation
+  - Code actions and refactoring
 
-  If you see something like the following:
-  ```
-  XVim hasn't confirmed the compatibility with your Xcode, Version X.X
-  Do you want to compile XVim with support Xcode Version X.X at your own risk? 
-  ```
-  Press `y` to use XVim with your Xcode version (even if XVim is not confirmed to work with that version of Xcode).
-  
-  6. Create `.xvimrc` as you need. 
+- **Fuzzy Finding**: Telescope for blazing-fast file and text search
+  - Find files by name
+  - Search content across project (live grep)
+  - Browse recent files
+  - Search symbols and diagnostics
 
-  7. Launch Xcode, where you'll be asked if you want to load XVim. Press 'Yes' to do so.
-     If you press 'No' by mistake, close Xcode and execute the following from a terminal:
+- **Smart Autocompletion**: nvim-cmp with multiple sources
+  - LSP-based completions
+  - Snippet support
+  - Buffer and path completions
+  - Beautiful completion menu with icons
 
-  ```
-  defaults delete  com.apple.dt.Xcode DVTPlugInManagerNonApplePlugIns-Xcode-X.X     (X.X is your Xcode version)
-  ```
-  Then relaunch Xcode and choose 'Yes' to load XVim.
-    
-## Branches and Releases
- 
- - `master`: for the lastest GM Xcode.
-             
- - `develop`: for the next beta Xcode and develop.
+- **AI Autocomplete**: Codeium integration (free GitHub Copilot alternative)
+  - Intelligent code suggestions
+  - Context-aware completions
+  - Multi-language support
 
- - tags
-   - `xcode11.7`
-   - `xcode11.5`
-   - `xcode11.2`
-   - `xcode10.3`
-   - `xcode10.2`
-   - `xcode10.1`
-   - `xcode9.4`
-   - `xcode9.3`
-   - `xcode9.2`
+### Additional Features
+- **Treesitter**: Advanced syntax highlighting and code understanding
+- **Auto Pairs**: Automatic bracket/quote pairing
+- **Comment Plugin**: Easy code commenting (gcc, gbc)
+- **Indent Guides**: Visual indent markers
+- **Which-Key**: Discoverable keybindings
+- **Multiple LSP Servers**: Support for Python, Lua, TypeScript, HTML, CSS, JSON, Bash
 
- Please use appropriate tags or branches.
+## Prerequisites
 
- For easy bugfixes and typo fixes, please open a pull request to the `master` branch. 
- For a new feature or adding support for a beta version of Xcode, please open a pull request
- to the `develop` branch.
-     
-## Uninstall
-  ```bash
-  $ make uninstall
-  ```
+Before installation, ensure you have:
 
-### Manual uninstall 
-Delete the following directory:
-`$HOME/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/XVim2.xcplugin`
+- **Neovim** >= 0.9.0 (required)
+  - macOS: `brew install neovim`
+  - Ubuntu: `sudo apt install neovim`
+  - Arch: `sudo pacman -S neovim`
+  - Fedora: `sudo dnf install neovim`
 
-## Feature list
-  See separate [FeatureList.md](Documents/FeatureList.md)
+- **Git** (required)
 
-## Bug reports
-  Unfortunately XVim sometimes crashes Xcode. We are working on eliminating all the bugs, but it's really hard work.
-  All bug reports are appreciated, and they are especially helpful when they include the following information:
+- **Python 3** with pip (for Python development)
 
-   * **Crash information**. Xcode shows threads stack trace when it crashes. Please copy the stack trace and include it in your report.
-   * **The operations you performed to cause the crash**, e.g. the series of key strokes or mouse clicks you performed.
-   * **The text you were manipulating**.
-   * **Xcode version**.
-   * **XVim version**. The version number of the revision you built.
-   * **.xvimrc**. If you have it.
-  
-  When it is hard to solve a problem with information above, take debug log according to the following movie please.
-  
-  [How to get XVim debug log](http://www.youtube.com/watch?v=50Bhu8setlc&feature=youtu.be)
+- **Node.js** >= 16 (for LSP servers)
+  - Download from: https://nodejs.org/
 
-  We appreciate if you write test case for the bug. Read "Write test" section in Documents/Developsers/PullRequest.md how to write test case. You do not need to update any source code but just write 7 items explained there in an issue you create.
+- **ripgrep** (recommended for Telescope live grep)
+  - macOS: `brew install ripgrep`
+  - Ubuntu: `apt install ripgrep`
+
+- **fd** (optional but recommended for Telescope)
+  - macOS: `brew install fd`
+  - Ubuntu: `apt install fd-find`
+
+## Installation
+
+### Quick Install (Recommended)
+
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/yourusername/nvim-config.git
+   cd nvim-config
+   ```
+
+2. Run the installation script:
+   ```bash
+   ./install.sh
+   ```
+
+3. Launch Neovim:
+   ```bash
+   nvim
+   ```
+
+On first launch, plugins will automatically install. This may take a few minutes.
+
+### Manual Installation
+
+1. Backup your existing Neovim configuration:
+   ```bash
+   mv ~/.config/nvim ~/.config/nvim.backup
+   ```
+
+2. Clone this repository to your Neovim config directory:
+   ```bash
+   git clone https://github.com/yourusername/nvim-config.git ~/.config/nvim
+   ```
+
+3. Launch Neovim and wait for plugins to install:
+   ```bash
+   nvim
+   ```
+
+## Post-Installation Setup
+
+### 1. Install LSP Servers
+
+LSP servers will be automatically installed by Mason when you first open relevant file types. You can also manually install them:
+
+```
+:Mason
+```
+
+Navigate and press `i` to install:
+- `pyright` - Python LSP
+- `lua_ls` - Lua LSP
+- `tsserver` - TypeScript/JavaScript LSP
+
+### 2. Setup AI Autocomplete (Codeium)
+
+Codeium is a free AI-powered autocomplete tool:
+
+1. In Neovim, run:
+   ```
+   :Codeium Auth
+   ```
+
+2. Follow the authentication instructions in your browser
+3. Return to Neovim and start coding!
+
+## Usage
+
+### Key Bindings
+
+The leader key is `<Space>`.
+
+#### General
+- `<leader>w` - Save file
+- `<leader>q` - Quit
+- `<leader>Q` - Quit all without saving
+- `jk` - Exit insert mode
+
+#### File Explorer
+- `<leader>e` - Toggle file explorer
+- `<leader>ef` - Find current file in explorer
+- `<leader>ec` - Collapse all folders
+- `<leader>er` - Refresh explorer
+
+#### Fuzzy Finding (Telescope)
+- `<leader>ff` - Find files
+- `<leader>fr` - Recent files
+- `<leader>fs` - Search text in files (live grep)
+- `<leader>fc` - Find word under cursor
+- `<leader>fb` - Find buffers
+- `<leader>fh` - Find help tags
+- `<leader>fd` - Find diagnostics
+
+#### LSP Features
+- `K` - Show hover documentation
+- `gd` - Go to definition
+- `gD` - Go to declaration
+- `gi` - Go to implementation
+- `gr` - Show references
+- `<leader>rn` - Rename symbol
+- `<leader>ca` - Code actions
+- `<leader>f` - Format document
+- `[d` - Previous diagnostic
+- `]d` - Next diagnostic
+- `<leader>d` - Show diagnostic float
+
+#### Autocompletion
+- `<C-Space>` - Trigger completion
+- `<C-j>` - Next suggestion
+- `<C-k>` - Previous suggestion
+- `<Tab>` - Next item / expand snippet
+- `<S-Tab>` - Previous item
+- `<CR>` - Confirm selection
+
+#### AI Autocomplete (Codeium)
+- `<C-g>` - Accept AI suggestion
+- `<C-]>` - Next suggestion
+- `<C-[>` - Previous suggestion
+- `<C-x>` - Clear suggestion
+
+#### Window Management
+- `<leader>sv` - Split vertically
+- `<leader>sh` - Split horizontally
+- `<leader>se` - Make splits equal size
+- `<leader>sx` - Close current split
+- `<C-h/j/k/l>` - Navigate between splits
+
+#### Buffers
+- `<S-h>` - Previous buffer
+- `<S-l>` - Next buffer
+- `<leader>bd` - Delete buffer
+
+#### Comments
+- `gcc` - Toggle line comment
+- `gbc` - Toggle block comment
+- (Visual mode) `gc` - Comment selection
+
+## Configuration Structure
+
+```
+.
+├── init.lua                   # Main entry point
+├── lua/
+│   ├── core/
+│   │   ├── options.lua       # Neovim options
+│   │   └── keymaps.lua       # General keybindings
+│   └── plugins/
+│       ├── init.lua          # Plugin manager setup
+│       ├── lsp.lua           # LSP configuration
+│       ├── cmp.lua           # Completion configuration
+│       ├── telescope.lua     # Fuzzy finder configuration
+│       ├── treesitter.lua    # Syntax highlighting
+│       ├── nvim-tree.lua     # File explorer
+│       └── ai.lua            # AI autocomplete
+├── install.sh                # Installation script
+└── README.md                 # This file
+```
+
+## Customization
+
+### Changing Color Scheme
+
+Edit `lua/plugins/init.lua` and modify the color scheme plugin:
+
+```lua
+{
+  "folke/tokyonight.nvim",
+  config = function()
+    vim.cmd([[colorscheme tokyonight]])
+  end,
+}
+```
+
+Popular alternatives:
+- `catppuccin/nvim` - Catppuccin
+- `EdenEast/nightfox.nvim` - Nightfox
+- `navarasu/onedark.nvim` - One Dark
+
+### Adding More LSP Servers
+
+Edit `lua/plugins/lsp.lua` and add to `ensure_installed`:
+
+```lua
+ensure_installed = {
+  "pyright",
+  "rust_analyzer",  -- Add Rust support
+  "gopls",          -- Add Go support
+  -- etc.
+}
+```
+
+### Modifying Options
+
+Edit `lua/core/options.lua` to change Neovim behavior:
+- Tab size
+- Line numbers
+- Scroll offset
+- And more...
+
+## Updating
+
+### If Installed via Symlink
+
+```bash
+cd /path/to/nvim-config
+git pull
+```
+
+Then in Neovim: `:Lazy sync`
+
+### If Copied Configuration
+
+```bash
+cd /path/to/nvim-config
+git pull
+cp -r init.lua lua ~/.config/nvim/
+```
+
+Then in Neovim: `:Lazy sync`
+
+## Troubleshooting
+
+### Plugins Not Loading
+
+Try reinstalling plugins:
+```
+:Lazy clean
+:Lazy sync
+```
+
+### LSP Not Working
+
+1. Check if LSP server is installed: `:Mason`
+2. Check LSP status: `:LspInfo`
+3. Reinstall LSP server in Mason
+
+### Python LSP Issues
+
+Ensure Python and pip are installed:
+```bash
+python3 --version
+pip3 --version
+```
+
+### Fuzzy Search Not Working
+
+Install ripgrep:
+- macOS: `brew install ripgrep`
+- Linux: `apt install ripgrep` or `pacman -S ripgrep`
+
+### AI Autocomplete Not Working
+
+1. Authenticate Codeium: `:Codeium Auth`
+2. Check status: `:Codeium Status`
+
+## Performance Tips
+
+1. **Lazy Loading**: Most plugins are already configured for lazy loading
+2. **Treesitter**: Only installs parsers for languages you use
+3. **LSP**: LSP servers only load for relevant file types
+4. **Disable Unused Plugins**: Comment out plugins you don't use in `lua/plugins/init.lua`
 
 ## Contributing
-  If you fix a bug by yourself and add new feature, see here.
 
-  [Contributing.md](Documents/Contributing.md)
+Feel free to customize this configuration to your needs! If you make improvements, consider sharing them.
 
-## Bountysource
-  XVim supports Bountysource. If you want to solve your issue sooner make bounty on your issue is one option. A contributer should work on it preferentially (not guaranteed though). To make bounty visit following link and go to "Issue" tab. Select your issue and make bounty on it. 
-  
-  https://www.bountysource.com/teams/xvimproject (XVim2)
-  https://www.bountysource.com/teams/xvim (XVim)
+## Credits
 
-## Donations
-  If you think the plugin is useful, please donate.
-  There are two options you can take. Donate for Japan Earthquake and Tsunami Relief or back the project via [BountySource](https://www.bountysource.com/teams/xvim). There is no rule that you cannot take both :) .
-  
-### Japan Earthquake and Tsunami Relief
-  Since I do not intend make money from this project, I am directing donations
-  to the people suffering from the damage of the 2011 Tohoku earthquake and tsunami in Japan.
-
-  Please donate directly through the Paypal donation site below, as
-  this will put more money to good use by reducing the transfer fee.
-
-  https://www.paypal-donations.com/pp-charity/web.us/campaign.jsp?cid=-12
-
-  Since no messages are sent when you donate from the paypal link, you could also write a donation message on
-  [Message Board]( https://github.com/JugglerShu/XVim/wiki/Donation-messages-to-XVim ).
-  I(we) would really appreciate it, and it will really motivate me(us)!
-
-### BountySource
-  If you like to help and enhance the project directly consider backing this project via [BountySource](https://www.bountysource.com/teams/xvim). You can back the team (which means you support the entire project) or you can make bounty on a specific issue. (If you have any bugs to be fixed or features to be implemented not in issues yet you can make one.)
-  
-## Contributors
-  See contributors page in github repository.
-  https://github.com/XVimProject/XVim2/contributors
+This configuration uses many excellent plugins from the Neovim community:
+- [lazy.nvim](https://github.com/folke/lazy.nvim) - Plugin manager
+- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) - LSP configuration
+- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - Completion engine
+- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) - Fuzzy finder
+- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Syntax highlighting
+- [Codeium](https://github.com/Exafunction/codeium.vim) - AI autocomplete
+- And many more!
 
 ## License
-  MIT License
+
+MIT License
+
+---
+
+**Happy Coding!** 🚀
